@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.customer;
+package com.udacity.jdnd.course3.critter.dtos;
 
 import java.util.List;
 
@@ -6,20 +6,11 @@ import java.util.List;
  * Represents the form that customer request and response data takes. Does not map
  * to the database directly.
  */
-public class CustomerDTO {
-    private long id;
+public class CustomerSaveDTO {
     private String name;
     private String phoneNumber;
     private String notes;
     private List<Long> petIds;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

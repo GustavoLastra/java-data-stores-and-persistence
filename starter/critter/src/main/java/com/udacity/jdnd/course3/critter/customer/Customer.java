@@ -16,9 +16,6 @@ import java.util.Set;
 public class Customer extends User {
 
     @NotNull
-    private String petType;
-
-    @NotNull
     private String phoneNumber;
 
     private String notes;
@@ -30,17 +27,8 @@ public class Customer extends User {
             inverseJoinColumns = @JoinColumn(name = "schedule_id"))
     Set<Schedule> schedules;
 
-    @NotNull
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Pet> pets;
-
-    public String getPetType() {
-        return petType;
-    }
-
-    public void setPetType(String petType) {
-        this.petType = petType;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;

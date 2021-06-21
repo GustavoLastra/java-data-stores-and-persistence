@@ -2,7 +2,8 @@ package com.udacity.jdnd.course3.critter;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.udacity.jdnd.course3.critter.customer.CustomerDTO;
+import com.udacity.jdnd.course3.critter.dtos.CustomerDTO;
+import com.udacity.jdnd.course3.critter.dtos.CustomerSaveDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeRequestDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeSkill;
@@ -48,7 +49,7 @@ public class CritterFunctionalTest {
 
     @Test
     public void testCreateCustomer(){
-        CustomerDTO customerDTO = createCustomerDTO();
+        CustomerSaveDTO customerDTO = createCustomerDTO();
         CustomerDTO newCustomer = userController.saveCustomer(customerDTO);
         CustomerDTO retrievedCustomer = userController.getAllCustomers().get(0);
         Assertions.assertEquals(newCustomer.getName(), customerDTO.getName());

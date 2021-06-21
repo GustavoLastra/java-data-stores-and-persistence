@@ -1,8 +1,7 @@
 package com.udacity.jdnd.course3.critter.user;
+import javax.transaction.Transactional;
 
-import org.springframework.data.repository.NoRepositoryBean;
-
-@NoRepositoryBean
+@Transactional
 public interface UserRepository extends UserBaseRepository<User> {
 
 

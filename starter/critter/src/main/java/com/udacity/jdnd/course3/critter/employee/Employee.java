@@ -19,13 +19,6 @@ import java.util.Set;
 @Setter
 public class Employee extends User {
 
-    @ManyToMany
-    @JoinTable(
-            name = "employee_schedule",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "schedule_id"))
-    Set<Schedule> schedules;
-
     @NotNull
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = EmployeeSkill.class)
@@ -39,6 +32,13 @@ public class Employee extends User {
     public Set<EmployeeSkill> getSkills() {
         return skills;
     }
+
+    @ManyToMany
+    @JoinTable(
+            name = "employee_schedule",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "schedule_id"))
+    Set<Schedule> schedules;
 
     public void setSkills(Set<EmployeeSkill> skills) {
         this.skills = skills;
