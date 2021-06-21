@@ -5,7 +5,7 @@ import com.google.common.collect.Sets;
 import com.udacity.jdnd.course3.critter.dtos.CustomerDTO;
 import com.udacity.jdnd.course3.critter.dtos.CustomerSaveDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeDTO;
-import com.udacity.jdnd.course3.critter.employee.EmployeeRequestDTO;
+import com.udacity.jdnd.course3.critter.employee.EmployeeAvailabilityDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeSkill;
 import com.udacity.jdnd.course3.critter.pet.PetController;
 import com.udacity.jdnd.course3.critter.pet.PetDTO;
@@ -156,7 +156,7 @@ public class CritterFunctionalTest {
         EmployeeDTO emp3n = userController.saveEmployee(emp3);
 
         //make a request that matches employee 1 or 2
-        EmployeeRequestDTO er1 = new EmployeeRequestDTO();
+        EmployeeAvailabilityDTO er1 = new EmployeeAvailabilityDTO();
         er1.setDate(LocalDate.of(2019, 12, 25)); //wednesday
         er1.setSkills(Sets.newHashSet(EmployeeSkill.PETTING));
 
@@ -165,7 +165,7 @@ public class CritterFunctionalTest {
         Assertions.assertEquals(eIds1, eIds1expected);
 
         //make a request that matches only employee 3
-        EmployeeRequestDTO er2 = new EmployeeRequestDTO();
+        EmployeeAvailabilityDTO er2 = new EmployeeAvailabilityDTO();
         er2.setDate(LocalDate.of(2019, 12, 27)); //friday
         er2.setSkills(Sets.newHashSet(EmployeeSkill.WALKING, EmployeeSkill.SHAVING));
 
@@ -266,11 +266,11 @@ public class CritterFunctionalTest {
         return petDTO;
     }
 
-    private static EmployeeRequestDTO createEmployeeRequestDTO() {
-        EmployeeRequestDTO employeeRequestDTO = new EmployeeRequestDTO();
-        employeeRequestDTO.setDate(LocalDate.of(2019, 12, 25));
-        employeeRequestDTO.setSkills(Sets.newHashSet(EmployeeSkill.FEEDING, EmployeeSkill.WALKING));
-        return employeeRequestDTO;
+    private static EmployeeAvailabilityDTO createEmployeeRequestDTO() {
+        EmployeeAvailabilityDTO employeeAvailabilityDTO = new EmployeeAvailabilityDTO();
+        employeeAvailabilityDTO.setDate(LocalDate.of(2019, 12, 25));
+        employeeAvailabilityDTO.setSkills(Sets.newHashSet(EmployeeSkill.FEEDING, EmployeeSkill.WALKING));
+        return employeeAvailabilityDTO;
     }
 
     private static ScheduleDTO createScheduleDTO(List<Long> petIds, List<Long> employeeIds, LocalDate date, Set<EmployeeSkill> activities) {

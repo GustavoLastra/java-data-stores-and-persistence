@@ -4,9 +4,9 @@ import com.udacity.jdnd.course3.critter.dtos.CustomerDTO;
 import com.udacity.jdnd.course3.critter.dtos.CustomerSaveDTO;
 import com.udacity.jdnd.course3.critter.customer.CustomerService;
 import com.udacity.jdnd.course3.critter.employee.EmployeeDTO;
-import com.udacity.jdnd.course3.critter.employee.EmployeeRequestDTO;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.udacity.jdnd.course3.critter.employee.EmployeeAvailabilityDTO;
+import com.udacity.jdnd.course3.critter.employee.EmployeeSaveDTO;
+import com.udacity.jdnd.course3.critter.employee.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
@@ -24,9 +24,11 @@ import java.util.Set;
 public class UserController {
 
     private final CustomerService customerService;
+    private final EmployeeService employeeService;
 
-    public UserController(CustomerService customerService) {
+    public UserController(CustomerService customerService,EmployeeService employeeService) {
         this.customerService = customerService;
+        this.employeeService = employeeService;
     }
 
     @PostMapping("/customer")
@@ -45,13 +47,13 @@ public class UserController {
     }
 
     @PostMapping("/employee")
-    public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+    public EmployeeDTO saveEmployee(@RequestBody EmployeeSaveDTO employeeDTO) {
+        return employeeService.save(employeeDTO);
     }
 
     @PostMapping("/employee/{employeeId}")
     public EmployeeDTO getEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        return employeeService.getEmployee(employeeId);
     }
 
     @PutMapping("/employee/{employeeId}")
@@ -60,7 +62,7 @@ public class UserController {
     }
 
     @GetMapping("/employee/availability")
-    public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
+    public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeAvailabilityDTO employeeDTO) {
         throw new UnsupportedOperationException();
     }
 

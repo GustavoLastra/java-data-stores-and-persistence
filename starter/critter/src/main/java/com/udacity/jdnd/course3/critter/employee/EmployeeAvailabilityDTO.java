@@ -7,7 +7,7 @@ import java.util.Set;
  * Represents a request to find available employees by skills. Does not map
  * to the database directly.
  */
-public class EmployeeRequestDTO {
+public class EmployeeAvailabilityDTO {
     private Set<EmployeeSkill> skills;
     private LocalDate date;
 
