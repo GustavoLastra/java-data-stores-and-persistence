@@ -1,4 +1,6 @@
-package com.udacity.jdnd.course3.critter.pet;
+package com.udacity.jdnd.course3.critter.dtos;
+
+import com.udacity.jdnd.course3.critter.pet.PetType;
 
 import java.time.LocalDate;
 
@@ -6,8 +8,7 @@ import java.time.LocalDate;
  * Represents the form that pet request and response data takes. Does not map
  * to the database directly.
  */
-public class PetDTO {
-    private long id;
+public class PetSaveDTO {
     private PetType type;
     private String name;
     private long ownerId;
@@ -52,13 +53,5 @@ public class PetDTO {
 
     public void setNotes(String notes) {
         this.notes = notes;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }

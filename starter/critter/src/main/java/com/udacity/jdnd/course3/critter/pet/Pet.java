@@ -33,7 +33,7 @@ public class Pet {
     Set<Schedule> schedules;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity=Customer.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

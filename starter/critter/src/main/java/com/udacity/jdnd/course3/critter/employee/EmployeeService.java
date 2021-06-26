@@ -1,4 +1,6 @@
 package com.udacity.jdnd.course3.critter.employee;
+import com.udacity.jdnd.course3.critter.dtos.EmployeeDTO;
+import com.udacity.jdnd.course3.critter.dtos.EmployeeSaveDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

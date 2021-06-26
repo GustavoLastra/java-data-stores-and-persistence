@@ -3,9 +3,9 @@ package com.udacity.jdnd.course3.critter.api;
 import com.udacity.jdnd.course3.critter.dtos.CustomerDTO;
 import com.udacity.jdnd.course3.critter.dtos.CustomerSaveDTO;
 import com.udacity.jdnd.course3.critter.customer.CustomerService;
-import com.udacity.jdnd.course3.critter.employee.EmployeeDTO;
+import com.udacity.jdnd.course3.critter.dtos.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeAvailabilityDTO;
-import com.udacity.jdnd.course3.critter.employee.EmployeeSaveDTO;
+import com.udacity.jdnd.course3.critter.dtos.EmployeeSaveDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +34,11 @@ public class UserController {
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerSaveDTO customerDTO){
         return customerService.save(customerDTO);
+    }
+
+    @GetMapping("/customer/{customerId}")
+    public CustomerDTO getCustomer(@PathVariable long customerId){
+        return customerService.getCustomer(customerId);
     }
 
     @GetMapping("/customer")

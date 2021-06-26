@@ -27,7 +27,7 @@ public class Customer extends User {
             inverseJoinColumns = @JoinColumn(name = "schedule_id"))
     Set<Schedule> schedules;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    @OneToMany(targetEntity = Pet.class,cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Pet> pets;
 
     public String getPhoneNumber() {

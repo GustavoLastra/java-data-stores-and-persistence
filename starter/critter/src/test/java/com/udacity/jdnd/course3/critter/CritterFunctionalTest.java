@@ -2,13 +2,10 @@ package com.udacity.jdnd.course3.critter;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.udacity.jdnd.course3.critter.dtos.CustomerDTO;
-import com.udacity.jdnd.course3.critter.dtos.CustomerSaveDTO;
-import com.udacity.jdnd.course3.critter.employee.EmployeeDTO;
+import com.udacity.jdnd.course3.critter.dtos.*;
 import com.udacity.jdnd.course3.critter.employee.EmployeeAvailabilityDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeSkill;
-import com.udacity.jdnd.course3.critter.pet.PetController;
-import com.udacity.jdnd.course3.critter.pet.PetDTO;
+import com.udacity.jdnd.course3.critter.api.PetController;
 import com.udacity.jdnd.course3.critter.pet.PetType;
 import com.udacity.jdnd.course3.critter.schedule.ScheduleController;
 import com.udacity.jdnd.course3.critter.schedule.ScheduleDTO;
@@ -69,15 +66,16 @@ public class CritterFunctionalTest {
 
     @Test
     public void testAddPetsToCustomer() {
-        CustomerDTO customerDTO = createCustomerDTO();
+        CustomerSaveDTO customerDTO = createCustomerDTO();
         CustomerDTO newCustomer = userController.saveCustomer(customerDTO);
 
-        PetDTO petDTO = createPetDTO();
+        PetSaveDTO petDTO = createPetDTO();
         petDTO.setOwnerId(newCustomer.getId());
         PetDTO newPet = petController.savePet(petDTO);
 
         //make sure pet contains customer id
         PetDTO retrievedPet = petController.getPet(newPet.getId());
+        //CustomerDTO createdCustomerWithPets = userController.getCustomer(createdCustomer.getId());
         Assertions.assertEquals(retrievedPet.getId(), newPet.getId());
         Assertions.assertEquals(retrievedPet.getOwnerId(), newCustomer.getId());
 
