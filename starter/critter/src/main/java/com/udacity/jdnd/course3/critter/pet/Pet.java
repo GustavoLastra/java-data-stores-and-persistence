@@ -37,7 +37,6 @@ public class Pet {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @NotNull
     @Past
     private LocalDate birthDate;
 

@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -28,7 +29,7 @@ public class Customer extends User {
     Set<Schedule> schedules;
 
     @OneToMany(targetEntity = Pet.class,cascade = CascadeType.ALL, mappedBy = "customer")
-    private Set<Pet> pets;
+    private Set<Pet> pets = new HashSet();
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -50,8 +51,8 @@ public class Customer extends User {
         return pets;
     }
 
-    public void setPets(Set<Pet> pets) {
-        this.pets = pets;
+    public void setPet(Pet pet) {
+        this.pets.add(pet);
     }
 
     public Set<Schedule> getSchedules() {

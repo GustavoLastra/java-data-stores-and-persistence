@@ -7,17 +7,22 @@ import com.udacity.jdnd.course3.critter.dtos.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.dtos.PetDTO;
 import com.udacity.jdnd.course3.critter.dtos.PetSaveDTO;
 import com.udacity.jdnd.course3.critter.employee.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.lang.Object;
+import java.util.Set;
 
 @Service
 public class PetService {
     private final PetRepository petRepository;
     private final CustomerRepository customerRepository;
+    private static final Logger log = LoggerFactory.getLogger(Pet.class);
+
 
     public PetService(PetRepository petRepository, CustomerRepository customerRepository) {
         this.petRepository = petRepository;
@@ -32,11 +37,11 @@ public class PetService {
         pet.setNotes(petSaveDTO.getNotes());
         Customer customer = this.customerRepository.findById(petSaveDTO.getOwnerId()).orElseThrow(CustomerNotFoundException::new);
         pet.setCustomer(customer);
+        customer.setPet(pet);
         Pet savedPet = this.petRepository.save(pet);
+        this.customerRepository.save(customer);
         return this.mapToPetDto(savedPet);
     }
-
-
 
     public List<PetDTO> getPets() {
         Iterable<Pet> pets = this.petRepository.findAll();

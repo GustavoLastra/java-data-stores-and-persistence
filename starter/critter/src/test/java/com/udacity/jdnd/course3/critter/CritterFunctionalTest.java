@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -252,7 +253,7 @@ public class CritterFunctionalTest {
     }
     private static CustomerDTO createCustomerDTO() {
         CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setName("TestEmployee");
+        customerDTO.setName("TestCustomer");
         customerDTO.setPhoneNumber("123-456-789");
         return customerDTO;
     }
@@ -261,6 +262,8 @@ public class CritterFunctionalTest {
         PetDTO petDTO = new PetDTO();
         petDTO.setName("TestPet");
         petDTO.setType(PetType.CAT);
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+        petDTO.setBirthDate(yesterday);
         return petDTO;
     }
 
