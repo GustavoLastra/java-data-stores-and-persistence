@@ -3,9 +3,11 @@ import com.udacity.jdnd.course3.critter.dtos.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.dtos.EmployeeSaveDTO;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class EmployeeService {
@@ -24,15 +26,6 @@ public class EmployeeService {
         return this.mapToEmployeeDto(savedEmployee);
     }
 
-    public EmployeeDTO mapToEmployeeDto(Employee savedEmployee) {
-        EmployeeDTO savedEmployeeDto = new EmployeeDTO();
-        savedEmployeeDto.setId(savedEmployee.getId());
-        savedEmployeeDto.setName(savedEmployee.getName());
-        savedEmployeeDto.setDaysAvailable(savedEmployee.getDaysAvailable());
-        savedEmployeeDto.setSkills(savedEmployee.getSkills());
-        return savedEmployeeDto;
-    }
-
     public List<EmployeeDTO> getCustomers() {
         Iterable<Employee> employees = this.employeeRepository.findAll();
         List<EmployeeDTO> employeeDtoList = new ArrayList<EmployeeDTO>();
@@ -45,5 +38,21 @@ public class EmployeeService {
     public EmployeeDTO getEmployee(Long employeeId) {
         Optional<Employee> employee = this.employeeRepository.findById(employeeId);
         return this.mapToEmployeeDto(employee.get());
+    }
+
+    public EmployeeDTO setAvailability(Set<DayOfWeek> daysAvailable, long employeeId) {
+        Employee employee = this.employeeRepository.findById(employeeId).orElseThrow(EmployeeNotFoundException::new);
+        employee.setDaysAvailable(daysAvailable);
+        Employee employeeUpdated = this.employeeRepository.save(employee);
+        return this.mapToEmployeeDto(employeeUpdated);
+    }
+
+    public EmployeeDTO mapToEmployeeDto(Employee savedEmployee) {
+        EmployeeDTO savedEmployeeDto = new EmployeeDTO();
+        savedEmployeeDto.setId(savedEmployee.getId());
+        savedEmployeeDto.setName(savedEmployee.getName());
+        savedEmployeeDto.setDaysAvailable(savedEmployee.getDaysAvailable());
+        savedEmployeeDto.setSkills(savedEmployee.getSkills());
+        return savedEmployeeDto;
     }
 }
