@@ -4,6 +4,8 @@ package com.udacity.jdnd.course3.critter.customer;
 import com.udacity.jdnd.course3.critter.dtos.CustomerDTO;
 import com.udacity.jdnd.course3.critter.dtos.CustomerSaveDTO;
 import com.udacity.jdnd.course3.critter.pet.Pet;
+import com.udacity.jdnd.course3.critter.pet.PetNotFoundException;
+import com.udacity.jdnd.course3.critter.pet.PetRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,9 +15,11 @@ import java.util.Set;
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;
+    private final PetRepository petRepository;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, PetRepository petRepository) {
         this.customerRepository = customerRepository;
+        this.petRepository = petRepository;
     }
 
     public CustomerDTO save(CustomerSaveDTO customerDTO) {
@@ -39,6 +43,13 @@ public class CustomerService {
         Customer customer = customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new);
 
         return this.mapToCustomerDTO(customer);
+    }
+
+
+
+    public CustomerDTO getOwnerByPet(long petId) {
+        Pet pet = this.petRepository.findById(petId).orElseThrow(PetNotFoundException::new);
+        return this.mapToCustomerDTO(pet.getCustomer());
     }
 
     public CustomerDTO mapToCustomerDTO(Customer customer) {

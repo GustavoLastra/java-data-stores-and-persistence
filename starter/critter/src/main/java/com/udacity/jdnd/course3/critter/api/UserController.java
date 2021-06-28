@@ -48,7 +48,7 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
-        throw new UnsupportedOperationException();
+       return customerService.getOwnerByPet(petId);
     }
 
     @PostMapping("/employee")
