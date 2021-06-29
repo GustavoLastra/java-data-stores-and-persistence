@@ -1,4 +1,5 @@
 package com.udacity.jdnd.course3.critter.employee;
+import com.udacity.jdnd.course3.critter.dtos.EmployeeAvailabilityDTO;
 import com.udacity.jdnd.course3.critter.dtos.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.dtos.EmployeeSaveDTO;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,17 @@ public class EmployeeService {
         savedEmployeeDto.setDaysAvailable(savedEmployee.getDaysAvailable());
         savedEmployeeDto.setSkills(savedEmployee.getSkills());
         return savedEmployeeDto;
+    }
+
+    public List<EmployeeDTO> findEmployeesForService(EmployeeAvailabilityDTO employeeDTO) {
+
+        Iterable<Employee> employees = this.employeeRepository.findByDaysAvailable(employeeDTO.getDate().getDayOfWeek());
+        List<EmployeeDTO> employeeDtoList = new ArrayList<EmployeeDTO>();
+        for (Employee employee : employees) {
+            if  (employee.getSkills().containsAll(employeeDTO.getSkills()) ) {
+                employeeDtoList.add(this.mapToEmployeeDto(employee));
+            }
+        }
+        return employeeDtoList;
     }
 }

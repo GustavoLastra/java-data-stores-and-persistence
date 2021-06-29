@@ -4,7 +4,7 @@ import com.udacity.jdnd.course3.critter.dtos.CustomerDTO;
 import com.udacity.jdnd.course3.critter.dtos.CustomerSaveDTO;
 import com.udacity.jdnd.course3.critter.customer.CustomerService;
 import com.udacity.jdnd.course3.critter.dtos.EmployeeDTO;
-import com.udacity.jdnd.course3.critter.employee.EmployeeAvailabilityDTO;
+import com.udacity.jdnd.course3.critter.dtos.EmployeeAvailabilityDTO;
 import com.udacity.jdnd.course3.critter.dtos.EmployeeSaveDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeService;
 import org.springframework.web.bind.annotation.*;
@@ -68,7 +68,7 @@ public class UserController {
 
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeAvailabilityDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        return employeeService.findEmployeesForService(employeeDTO);
     }
 
 }

@@ -3,7 +3,7 @@ package com.udacity.jdnd.course3.critter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.udacity.jdnd.course3.critter.dtos.*;
-import com.udacity.jdnd.course3.critter.employee.EmployeeAvailabilityDTO;
+import com.udacity.jdnd.course3.critter.dtos.EmployeeAvailabilityDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeSkill;
 import com.udacity.jdnd.course3.critter.api.PetController;
 import com.udacity.jdnd.course3.critter.pet.PetType;
@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
