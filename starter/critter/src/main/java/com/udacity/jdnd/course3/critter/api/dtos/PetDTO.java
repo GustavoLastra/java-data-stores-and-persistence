@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.dtos;
+package com.udacity.jdnd.course3.critter.api.dtos;
 
 /**
  * Represents the form that pet request and response data takes. Does not map

@@ -1,7 +1,7 @@
 package com.udacity.jdnd.course3.critter.employee;
-import com.udacity.jdnd.course3.critter.dtos.EmployeeAvailabilityDTO;
-import com.udacity.jdnd.course3.critter.dtos.EmployeeDTO;
-import com.udacity.jdnd.course3.critter.dtos.EmployeeSaveDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.EmployeeAvailabilityDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.EmployeeDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.EmployeeSaveDTO;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;

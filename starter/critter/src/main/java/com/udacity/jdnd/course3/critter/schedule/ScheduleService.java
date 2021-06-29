@@ -1,8 +1,8 @@
 package com.udacity.jdnd.course3.critter.schedule;
 
 import com.udacity.jdnd.course3.critter.customer.CustomerRepository;
-import com.udacity.jdnd.course3.critter.dtos.ScheduleCreateDTO;
-import com.udacity.jdnd.course3.critter.dtos.ScheduleDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.ScheduleCreateDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.ScheduleDTO;
 import com.udacity.jdnd.course3.critter.employee.Employee;
 import com.udacity.jdnd.course3.critter.employee.EmployeeNotFoundException;
 import com.udacity.jdnd.course3.critter.employee.EmployeeRepository;

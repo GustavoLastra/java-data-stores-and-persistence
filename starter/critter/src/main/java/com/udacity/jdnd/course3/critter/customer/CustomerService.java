@@ -1,8 +1,8 @@
 package com.udacity.jdnd.course3.critter.customer;
 
 
-import com.udacity.jdnd.course3.critter.dtos.CustomerDTO;
-import com.udacity.jdnd.course3.critter.dtos.CustomerCreateDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.CustomerDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.CustomerCreateDTO;
 import com.udacity.jdnd.course3.critter.pet.Pet;
 import com.udacity.jdnd.course3.critter.pet.PetNotFoundException;
 import com.udacity.jdnd.course3.critter.pet.PetRepository;

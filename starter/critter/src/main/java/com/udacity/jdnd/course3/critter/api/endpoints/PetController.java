@@ -1,7 +1,7 @@
-package com.udacity.jdnd.course3.critter.api;
+package com.udacity.jdnd.course3.critter.api.endpoints;
 
-import com.udacity.jdnd.course3.critter.dtos.PetDTO;
-import com.udacity.jdnd.course3.critter.dtos.PetCreateDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.PetDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.PetCreateDTO;
 import com.udacity.jdnd.course3.critter.pet.PetService;
 import org.springframework.web.bind.annotation.*;
 

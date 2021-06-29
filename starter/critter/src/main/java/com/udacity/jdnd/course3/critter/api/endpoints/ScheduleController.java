@@ -1,6 +1,6 @@
-package com.udacity.jdnd.course3.critter.api;
+package com.udacity.jdnd.course3.critter.api.endpoints;
 
-import com.udacity.jdnd.course3.critter.dtos.ScheduleDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.ScheduleDTO;
 import com.udacity.jdnd.course3.critter.schedule.ScheduleService;
 import org.springframework.web.bind.annotation.*;
 

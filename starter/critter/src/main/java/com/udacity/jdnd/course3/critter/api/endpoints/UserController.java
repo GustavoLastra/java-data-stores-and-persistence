@@ -1,11 +1,11 @@
-package com.udacity.jdnd.course3.critter.api;
+package com.udacity.jdnd.course3.critter.api.endpoints;
 
-import com.udacity.jdnd.course3.critter.dtos.CustomerDTO;
-import com.udacity.jdnd.course3.critter.dtos.CustomerCreateDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.CustomerDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.CustomerCreateDTO;
 import com.udacity.jdnd.course3.critter.customer.CustomerService;
-import com.udacity.jdnd.course3.critter.dtos.EmployeeDTO;
-import com.udacity.jdnd.course3.critter.dtos.EmployeeAvailabilityDTO;
-import com.udacity.jdnd.course3.critter.dtos.EmployeeSaveDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.EmployeeDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.EmployeeAvailabilityDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.EmployeeSaveDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 

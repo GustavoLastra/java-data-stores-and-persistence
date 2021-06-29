@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.dtos;
+package com.udacity.jdnd.course3.critter.api.dtos;
 
 import java.util.List;
 
