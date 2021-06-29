@@ -3,10 +3,8 @@ package com.udacity.jdnd.course3.critter.pet;
 import com.udacity.jdnd.course3.critter.customer.Customer;
 import com.udacity.jdnd.course3.critter.customer.CustomerNotFoundException;
 import com.udacity.jdnd.course3.critter.customer.CustomerRepository;
-import com.udacity.jdnd.course3.critter.dtos.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.dtos.PetDTO;
-import com.udacity.jdnd.course3.critter.dtos.PetSaveDTO;
-import com.udacity.jdnd.course3.critter.employee.Employee;
+import com.udacity.jdnd.course3.critter.dtos.PetCreateDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,8 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.lang.Object;
-import java.util.Set;
 
 @Service
 public class PetService {
@@ -29,13 +25,13 @@ public class PetService {
         this.customerRepository = customerRepository;
     }
 
-    public PetDTO save(PetSaveDTO petSaveDTO) {
+    public PetDTO save(PetCreateDTO petCreateDTO) {
         Pet pet = new Pet();
-        pet.setName(petSaveDTO.getName());
-        pet.setPetType(petSaveDTO.getType().toString());
-        pet.setBirthDate(petSaveDTO.getBirthDate());
-        pet.setNotes(petSaveDTO.getNotes());
-        Customer customer = this.customerRepository.findById(petSaveDTO.getOwnerId()).orElseThrow(CustomerNotFoundException::new);
+        pet.setName(petCreateDTO.getName());
+        pet.setPetType(petCreateDTO.getType().toString());
+        pet.setBirthDate(petCreateDTO.getBirthDate());
+        pet.setNotes(petCreateDTO.getNotes());
+        Customer customer = this.customerRepository.findById(petCreateDTO.getOwnerId()).orElseThrow(CustomerNotFoundException::new);
         pet.setCustomer(customer);
         customer.setPet(pet);
         Pet savedPet = this.petRepository.save(pet);

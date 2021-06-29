@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * Represents the form that pet request and response data takes. Does not map
  * to the database directly.
  */
-public class PetSaveDTO {
+public class PetCreateDTO {
     private PetType type;
     private String name;
     private long ownerId;

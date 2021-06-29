@@ -6,7 +6,7 @@ import java.util.List;
  * Represents the form that customer request and response data takes. Does not map
  * to the database directly.
  */
-public class CustomerSaveDTO {
+public class CustomerCreateDTO {
     private String name;
     private String phoneNumber;
     private String notes;

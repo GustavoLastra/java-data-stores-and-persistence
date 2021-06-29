@@ -2,7 +2,7 @@ package com.udacity.jdnd.course3.critter.customer;
 
 
 import com.udacity.jdnd.course3.critter.dtos.CustomerDTO;
-import com.udacity.jdnd.course3.critter.dtos.CustomerSaveDTO;
+import com.udacity.jdnd.course3.critter.dtos.CustomerCreateDTO;
 import com.udacity.jdnd.course3.critter.pet.Pet;
 import com.udacity.jdnd.course3.critter.pet.PetNotFoundException;
 import com.udacity.jdnd.course3.critter.pet.PetRepository;
@@ -22,7 +22,7 @@ public class CustomerService {
         this.petRepository = petRepository;
     }
 
-    public CustomerDTO save(CustomerSaveDTO customerDTO) {
+    public CustomerDTO save(CustomerCreateDTO customerDTO) {
         Customer customer = new Customer();
         customer.setName(customerDTO.getName());
         customer.setPhoneNumber(customerDTO.getPhoneNumber());
@@ -41,11 +41,8 @@ public class CustomerService {
 
     public CustomerDTO getCustomer(long customerId) {
         Customer customer = customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new);
-
         return this.mapToCustomerDTO(customer);
     }
-
-
 
     public CustomerDTO getOwnerByPet(long petId) {
         Pet pet = this.petRepository.findById(petId).orElseThrow(PetNotFoundException::new);

@@ -1,7 +1,7 @@
 package com.udacity.jdnd.course3.critter.api;
 
 import com.udacity.jdnd.course3.critter.dtos.PetDTO;
-import com.udacity.jdnd.course3.critter.dtos.PetSaveDTO;
+import com.udacity.jdnd.course3.critter.dtos.PetCreateDTO;
 import com.udacity.jdnd.course3.critter.pet.PetService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public class PetController {
     }
 
     @PostMapping
-    public PetDTO savePet(@RequestBody PetSaveDTO petDTO) {
+    public PetDTO savePet(@RequestBody PetCreateDTO petDTO) {
         return this.petService.save(petDTO);
     }
 

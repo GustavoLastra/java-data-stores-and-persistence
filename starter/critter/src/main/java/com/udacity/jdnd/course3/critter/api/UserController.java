@@ -1,7 +1,7 @@
 package com.udacity.jdnd.course3.critter.api;
 
 import com.udacity.jdnd.course3.critter.dtos.CustomerDTO;
-import com.udacity.jdnd.course3.critter.dtos.CustomerSaveDTO;
+import com.udacity.jdnd.course3.critter.dtos.CustomerCreateDTO;
 import com.udacity.jdnd.course3.critter.customer.CustomerService;
 import com.udacity.jdnd.course3.critter.dtos.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.dtos.EmployeeAvailabilityDTO;
@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/customer")
-    public CustomerDTO saveCustomer(@RequestBody CustomerSaveDTO customerDTO){
+    public CustomerDTO saveCustomer(@RequestBody CustomerCreateDTO customerDTO){
         return customerService.save(customerDTO);
     }
 

@@ -7,8 +7,8 @@ import com.udacity.jdnd.course3.critter.dtos.EmployeeAvailabilityDTO;
 import com.udacity.jdnd.course3.critter.employee.EmployeeSkill;
 import com.udacity.jdnd.course3.critter.api.PetController;
 import com.udacity.jdnd.course3.critter.pet.PetType;
-import com.udacity.jdnd.course3.critter.schedule.ScheduleController;
-import com.udacity.jdnd.course3.critter.schedule.ScheduleDTO;
+import com.udacity.jdnd.course3.critter.api.ScheduleController;
+import com.udacity.jdnd.course3.critter.dtos.ScheduleDTO;
 import com.udacity.jdnd.course3.critter.api.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -46,7 +46,7 @@ public class CritterFunctionalTest {
 
     @Test
     public void testCreateCustomer(){
-        CustomerSaveDTO customerDTO = createCustomerDTO();
+        CustomerCreateDTO customerDTO = createCustomerDTO();
         CustomerDTO newCustomer = userController.saveCustomer(customerDTO);
         CustomerDTO retrievedCustomer = userController.getAllCustomers().get(0);
         Assertions.assertEquals(newCustomer.getName(), customerDTO.getName());
@@ -66,10 +66,10 @@ public class CritterFunctionalTest {
 
     @Test
     public void testAddPetsToCustomer() {
-        CustomerSaveDTO customerDTO = createCustomerDTO();
+        CustomerCreateDTO customerDTO = createCustomerDTO();
         CustomerDTO newCustomer = userController.saveCustomer(customerDTO);
 
-        PetSaveDTO petDTO = createPetDTO();
+        PetCreateDTO petDTO = createPetDTO();
         petDTO.setOwnerId(newCustomer.getId());
         PetDTO newPet = petController.savePet(petDTO);
 

@@ -1,12 +1,13 @@
 package com.udacity.jdnd.course3.critter.customer;
 
 import com.udacity.jdnd.course3.critter.pet.Pet;
-import com.udacity.jdnd.course3.critter.schedule.Schedule;
 import com.udacity.jdnd.course3.critter.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,13 +21,6 @@ public class Customer extends User {
     private String phoneNumber;
 
     private String notes;
-
-    @ManyToMany
-    @JoinTable(
-            name = "customer_schedule",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "schedule_id"))
-    Set<Schedule> schedules;
 
     @OneToMany(targetEntity = Pet.class,cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Pet> pets = new HashSet();
@@ -53,13 +47,5 @@ public class Customer extends User {
 
     public void setPet(Pet pet) {
         this.pets.add(pet);
-    }
-
-    public Set<Schedule> getSchedules() {
-        return schedules;
-    }
-
-    public void setSchedules(Set<Schedule> schedules) {
-        this.schedules = schedules;
     }
 }
