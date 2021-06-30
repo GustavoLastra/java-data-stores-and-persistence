@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,7 +31,7 @@ public class Pet {
             name = "pet_schedule",
             joinColumns = @JoinColumn(name = "pet_id"),
             inverseJoinColumns = @JoinColumn(name = "schedule_id"))
-    Set<Schedule> schedules;
+    Set<Schedule> schedules = new HashSet<Schedule>();
 
 
     @ManyToOne(targetEntity=Customer.class, fetch = FetchType.LAZY)
@@ -88,5 +89,13 @@ public class Pet {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public Set<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedules.add(schedule);
     }
 }

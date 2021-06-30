@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.DayOfWeek;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -38,7 +39,7 @@ public class Employee extends User {
             name = "employee_schedule",
             joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "schedule_id"))
-    Set<Schedule> schedules;
+    Set<Schedule> schedules = new HashSet<Schedule>();
 
     public void setSkills(Set<EmployeeSkill> skills) {
         this.skills = skills;
@@ -56,7 +57,7 @@ public class Employee extends User {
         return schedules;
     }
 
-    public void setSchedules(Set<Schedule> schedules) {
-        this.schedules = schedules;
+    public void setSchedule(Schedule schedule) {
+        this.schedules.add(schedule) ;
     }
 }

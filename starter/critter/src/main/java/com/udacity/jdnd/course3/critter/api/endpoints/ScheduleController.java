@@ -30,17 +30,17 @@ public class ScheduleController {
     }
 
     @GetMapping("/pet/{petId}")
-    public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
+    public List<ScheduleDTO> getSchedulesForPet(@PathVariable long petId) {
+        return scheduleService.getSchedulesForPet(petId);
     }
 
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        return scheduleService.getScheduleForEmployee(employeeId);
     }
 
     @GetMapping("/customer/{customerId}")
-    public List<ScheduleDTO> getScheduleForCustomer(@PathVariable long customerId) {
-        throw new UnsupportedOperationException();
+    public List<ScheduleDTO> getSchedulesForCustomer(@PathVariable long customerId) {
+        return scheduleService.getSchedulesForCustomer(customerId);
     }
 }
