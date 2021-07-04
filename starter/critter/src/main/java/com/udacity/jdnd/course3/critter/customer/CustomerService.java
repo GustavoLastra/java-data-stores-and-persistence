@@ -1,8 +1,8 @@
 package com.udacity.jdnd.course3.critter.customer;
 
 
-import com.udacity.jdnd.course3.critter.api.dtos.CustomerDTO;
 import com.udacity.jdnd.course3.critter.api.dtos.CustomerCreateDTO;
+import com.udacity.jdnd.course3.critter.api.dtos.CustomerDTO;
 import com.udacity.jdnd.course3.critter.pet.Pet;
 import com.udacity.jdnd.course3.critter.pet.PetNotFoundException;
 import com.udacity.jdnd.course3.critter.pet.PetRepository;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class CustomerService {
@@ -54,7 +53,7 @@ public class CustomerService {
         savedCustomerDto.setId(customer.getId());
         savedCustomerDto.setName(customer.getName());
         savedCustomerDto.setPhoneNumber(customer.getPhoneNumber());
-        Set<Pet> pets =  customer.getPets();
+        List<Pet> pets =  customer.getPets();
         List<Long> petsIds = new ArrayList<>();
         if (pets!= null) {
             pets.forEach((pet) -> petsIds.add(pet.getId()));

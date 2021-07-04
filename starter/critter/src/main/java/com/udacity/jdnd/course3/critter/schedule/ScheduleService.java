@@ -15,9 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,21 +35,12 @@ public class ScheduleService {
     }
 
     public ScheduleDTO save(ScheduleCreateDTO scheduleCreateDTO) {
-        Set<Pet> pets = getPets(scheduleCreateDTO);
-        Set<Employee> employees = getEmployees(scheduleCreateDTO);
+        List<Pet> pets = getPets(scheduleCreateDTO);
+        List<Employee> employees = getEmployees(scheduleCreateDTO);
         Schedule createdSchedule = createSchedule(scheduleCreateDTO, pets,employees);
         updatePetsWithSchedule(pets, createdSchedule);
         updateEmployeesWithSchedule(employees, createdSchedule);
         return this.mapToScheduleDto(createdSchedule);
-    }
-
-    public ScheduleDTO mapToScheduleDto(Schedule savedSchedule) {
-        ScheduleDTO savedScheduleDto = new ScheduleDTO();
-        savedScheduleDto.setPetIds(savedSchedule.getPets().stream().map(pet-> pet.getId()).collect(Collectors.toList()));
-        savedScheduleDto.setEmployeeIds(savedSchedule.getEmployees().stream().map(employee-> employee.getId()).collect(Collectors.toList()));
-        savedScheduleDto.setActivities(savedSchedule.getActivities());
-        savedScheduleDto.setDate(savedSchedule.getDate());
-        return savedScheduleDto;
     }
 
     public List<ScheduleDTO> getAllSchedules() {
@@ -63,51 +52,18 @@ public class ScheduleService {
         return scheduleDTOList;
     }
 
-    private void updateEmployeesWithSchedule(Set<Employee> employees, Schedule createdSchedule) {
-        employees.forEach(employee-> {
-            employee.setSchedule(createdSchedule);
-            this.employeeRepository.save(employee);
-        });
-    }
-
-    private void updatePetsWithSchedule(Set<Pet> pets, Schedule createdSchedule) {
-        pets.forEach(pet-> {
-            pet.setSchedule(createdSchedule);
-            this.petRepository.save(pet);
-        });
-    }
-
-    private Schedule createSchedule(ScheduleCreateDTO scheduleCreateDTO, Set<Pet> pets, Set<Employee> employees) {
-        Schedule schedule  = new Schedule();
-        schedule.setPets(pets);
-        schedule.setEmployees(employees);
-        schedule.setActivities(scheduleCreateDTO.getActivities());
-        schedule.setDate(scheduleCreateDTO.getDate());
-        return this.scheduleRepository.save(schedule);
-    }
-
-    private Set<Employee> getEmployees(ScheduleCreateDTO scheduleCreateDTO) {
-        return scheduleCreateDTO.getEmployeeIds().stream().map(employeeId -> employeeRepository.findById(employeeId).orElseThrow(EmployeeNotFoundException::new)).collect(Collectors.toSet());
-    }
-
-    private Set<Pet> getPets(ScheduleCreateDTO scheduleCreateDTO) {
-        return scheduleCreateDTO.getPetIds().stream().map(petId -> petRepository.findById(petId).orElseThrow(PetNotFoundException::new)).collect(Collectors.toSet());
-    }
-
     public List<ScheduleDTO> getSchedulesForCustomer(long customerId) {
-        Set<ScheduleDTO> schedules = new HashSet<>();
-        Set<Pet> pets = getCustomerPets(customerId);
-        pets.forEach(pet -> pet.getSchedules().forEach(schedule -> schedules.add(this.mapToScheduleDto(schedule))));
+        List<ScheduleDTO> schedules = new ArrayList<>();
+        List<Pet> pets = getCustomerPets(customerId);
+        pets.forEach(pet -> pet.getSchedules()
+                .forEach(schedule -> schedules.add(this.mapToScheduleDto(schedule))));
         List<ScheduleDTO> scheduleDTOList = new ArrayList<>(schedules);
         return scheduleDTOList;
     }
 
-    private Set<Pet> getCustomerPets(long customerId) {
-        return this.customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new).getPets();
-    }
 
     public List<ScheduleDTO> getScheduleForEmployee(long employeeId) {
-        Set<Schedule> schedules = this.employeeRepository.findById(employeeId).orElseThrow(EmployeeNotFoundException::new).getSchedules();
+        List<Schedule> schedules = this.employeeRepository.findById(employeeId).orElseThrow(EmployeeNotFoundException::new).getSchedules();
         List<ScheduleDTO> scheduleDTOS = new ArrayList<>();
         for (Schedule schedule : schedules){
             ScheduleDTO scheduleDTO = this.mapToScheduleDto(schedule);
@@ -117,11 +73,55 @@ public class ScheduleService {
     }
 
     public List<ScheduleDTO> getSchedulesForPet(long petId) {
-        Set<Schedule> schedules = this.petRepository.findById(petId).orElseThrow(PetNotFoundException::new).getSchedules();
+        List<Schedule> schedules = this.petRepository.findById(petId).orElseThrow(PetNotFoundException::new).getSchedules();
         List<ScheduleDTO>  scheduleDTOS= new ArrayList<>();
         for (Schedule schedule: schedules){
             scheduleDTOS.add(this.mapToScheduleDto(schedule));
         }
         return scheduleDTOS;
+    }
+
+    public ScheduleDTO mapToScheduleDto(Schedule savedSchedule) {
+        ScheduleDTO savedScheduleDto = new ScheduleDTO();
+        savedScheduleDto.setPetIds(savedSchedule.getPets().stream().map(pet-> pet.getId()).collect(Collectors.toList()));
+        savedScheduleDto.setEmployeeIds(savedSchedule.getEmployees().stream().map(employee-> employee.getId()).collect(Collectors.toList()));
+        savedScheduleDto.setActivities(savedSchedule.getActivities());
+        savedScheduleDto.setDate(savedSchedule.getDate());
+        return savedScheduleDto;
+    }
+
+    private void updateEmployeesWithSchedule(List<Employee> employees, Schedule createdSchedule) {
+        employees.forEach(employee-> {
+            employee.setSchedule(createdSchedule);
+            this.employeeRepository.save(employee);
+        });
+    }
+
+    private void updatePetsWithSchedule(List<Pet> pets, Schedule createdSchedule) {
+        pets.forEach(pet-> {
+            pet.setSchedule(createdSchedule);
+            this.petRepository.save(pet);
+        });
+    }
+
+    private Schedule createSchedule(ScheduleCreateDTO scheduleCreateDTO, List<Pet> pets, List<Employee> employees) {
+        Schedule schedule  = new Schedule();
+        schedule.setPets(pets);
+        schedule.setEmployees(employees);
+        schedule.setActivities(scheduleCreateDTO.getActivities());
+        schedule.setDate(scheduleCreateDTO.getDate());
+        return this.scheduleRepository.save(schedule);
+    }
+
+    private List<Employee> getEmployees(ScheduleCreateDTO scheduleCreateDTO) {
+        return scheduleCreateDTO.getEmployeeIds().stream().map(employeeId -> employeeRepository.findById(employeeId).orElseThrow(EmployeeNotFoundException::new)).collect(Collectors.toList());
+    }
+
+    private List<Pet> getPets(ScheduleCreateDTO scheduleCreateDTO) {
+        return scheduleCreateDTO.getPetIds().stream().map(petId -> petRepository.findById(petId).orElseThrow(PetNotFoundException::new)).collect(Collectors.toList());
+    }
+
+    private List<Pet> getCustomerPets(long customerId) {
+        return this.customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new).getPets();
     }
 }

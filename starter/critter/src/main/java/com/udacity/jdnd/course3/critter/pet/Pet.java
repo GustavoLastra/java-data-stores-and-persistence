@@ -4,12 +4,13 @@ import com.udacity.jdnd.course3.critter.customer.Customer;
 import com.udacity.jdnd.course3.critter.schedule.Schedule;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -31,7 +32,7 @@ public class Pet {
             name = "pet_schedule",
             joinColumns = @JoinColumn(name = "pet_id"),
             inverseJoinColumns = @JoinColumn(name = "schedule_id"))
-    Set<Schedule> schedules = new HashSet<Schedule>();
+    List<Schedule> schedules = new ArrayList<>();
 
 
     @ManyToOne(targetEntity=Customer.class, fetch = FetchType.LAZY)
@@ -91,7 +92,7 @@ public class Pet {
         this.notes = notes;
     }
 
-    public Set<Schedule> getSchedules() {
+    public List<Schedule> getSchedules() {
         return schedules;
     }
 

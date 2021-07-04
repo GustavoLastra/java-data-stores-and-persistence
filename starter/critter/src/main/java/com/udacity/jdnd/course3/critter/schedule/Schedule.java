@@ -10,6 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,11 +29,11 @@ public class Schedule {
 
     @NotNull
     @ManyToMany
-    Set<Employee> employees;
+    List<Employee> employees;
 
     @NotNull
     @ManyToMany
-    Set<Pet> pets;
+    List<Pet> pets;
 
     @NotNull
     private LocalDate date;
@@ -50,19 +51,19 @@ public class Schedule {
         this.id = id;
     }
 
-    public Set<Employee> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<Employee> employees) {
+    public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
 
-    public Set<Pet> getPets() {
+    public List<Pet> getPets() {
         return pets;
     }
 
-    public void setPets(Set<Pet> pets) {
+    public void setPets(List<Pet> pets) {
         this.pets = pets;
     }
 
